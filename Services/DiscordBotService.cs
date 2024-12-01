@@ -61,14 +61,14 @@ namespace DiscordBotManagerAPI.Services
         }
         public async Task<string> Status(string botName)
         {
-            var status = botList.Find(x => x.botName == botName).running;
-            if (status)
+            var bot = botList.Find(x => x.botName == botName);
+            if(bot == null || bot?.running == false)
             {
-                return "running";
+                return "dead";
             }
             else
             {
-                return "dead";
+                return "running";
             }
         }
     }
